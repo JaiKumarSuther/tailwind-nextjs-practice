@@ -36,10 +36,11 @@ export default function Home() {
     },
     {
       title: "Startup 5",
-      heading: "Seamless Integration",
+      heading: "Forget About Code",
       description:
-        "Integrate your favorite tools and services effortlessly to build a powerful and scalable product.",
-    },
+        "Startup Framework gives you complete freedom over your creative process — you don't have to think about any technical aspects. There are no limits and absolutely no coding.",
+    
+    } 
   ];
 
   const nextSlide = () => {
@@ -73,8 +74,8 @@ export default function Home() {
   
   
   return (
-    <div className="flex flex-col items-center justify-evenly bg-blue-100 h-[100vh] w-[100vw] px-[115px] bg-[url(/Image.png)]" >
-      <ul className="flex justify-between w-[469px] items-center">
+    <div className="flex flex-col items-center justify-evenly bg-blue-100 h-[100vh] w-[100%] px-[40px] lg:px-[115px] md:px-[65px] bg-[url(/Image.png)]" >
+      <ul className="flex justify-between w-[330px] sm:w-[370px] md:w-[400px] lg:w-[469px] items-center">
         <li className="cursor-pointer">Home</li>
         <li className="cursor-pointer">Features</li>
         <li className="cursor-pointer">Pricing</li>
@@ -82,14 +83,14 @@ export default function Home() {
         <FontAwesomeIcon icon={faDribbble} className="w-[16px] cursor-pointer" />
         <FontAwesomeIcon icon={faBehance} className="w-[21px] cursor-pointer" />
       </ul>
-      <div className="flex gap-3.5 items-center w-[100%] justify-between" >
+      <div className="flex gap-3.5 items-center w-[100%] " >
         <FontAwesomeIcon icon={faAngleLeft} className={`h-[35px] w-[11px] cursor-pointer 
         ${slideNumber === 0 ? "opacity-30": "opacity-100"}`}
         onClick={prevSlide}/>
-        <div className="flex flex-col items-center justify h-[257px]">
-          <h3 className="text-[24px] font-bold">{slides[slideNumber].title}</h3>
-          <h1 className="text-[72px] font-bold">{slides[slideNumber].heading}</h1>
-          <p className="text-[22px] font-medium text-center w-[736px] p-0">
+        <div className="flex flex-col items-center justify-around h-[257px]">
+          <h3 className="text-[20px] font-bold ">{slides[slideNumber].title}</h3>
+          <h1 className="text-[20px] text-center font-bold sm:text-[40px]  md:text-[55px] lg:text-[72px]">{slides[slideNumber].heading}</h1>
+          <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-medium text-center px-0 ">
           {slides[slideNumber].description}
           </p>
 
