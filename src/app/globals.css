@@ -3,6 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-twenty: 40px;
+}
+
+.text-custom {
+  font-size: var(--font-twenty);
 }
 
 @theme inline {

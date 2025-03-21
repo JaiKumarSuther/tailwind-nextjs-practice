@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBehance, faDribbble, } from "@fortawesome/free-brands-svg-icons";
 import { faAngleLeft, faAngleRight, faCircle} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -74,10 +75,10 @@ export default function Home() {
   
   
   return (
-    <div className="flex flex-col items-center justify-evenly bg-blue-100 h-[100vh] w-[100%] px-[40px] lg:px-[115px] md:px-[65px] bg-[url(/Image.png)]" >
-      <ul className="flex justify-between w-[330px] sm:w-[370px] md:w-[400px] lg:w-[469px] items-center">
+      <div className="flex flex-col items-center justify-evenly bg-blue-200 h-[100vh] w-[100%] px-[40px] lg:px-[115px] md:px-[65px] bg-[url(/Image.png)] bg-no-repeat" >
+        <ul className="flex justify-between w-[300px] sm:w-[370px] md:w-[400px] lg:w-[469px] items-center">
         <li className="cursor-pointer">Home</li>
-        <li className="cursor-pointer">Features</li>
+        <Link href="/products">Products</Link>
         <li className="cursor-pointer">Pricing</li>
         <li className="cursor-pointer">Blog</li>
         <FontAwesomeIcon icon={faDribbble} className="w-[16px] cursor-pointer" />
@@ -114,7 +115,7 @@ export default function Home() {
             ></div>
             ))}
           </ul>
-      <button className="cursor-pointer w-[230px] h-[60px] bg-[#482BE7] text-white rounded-[100px] text-[18px] font-medium">Create an Account</button>
+      <button className="cursor-pointer w-[230px] h-[60px] bg-[#6497f5] text-white rounded-[100px] text-[18px] font-medium">Create an Account</button>
     </div>
   );
 }
