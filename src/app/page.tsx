@@ -1,21 +1,33 @@
 'use client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
 import { faBehance, faDribbble, } from "@fortawesome/free-brands-svg-icons";
 import { faAngleLeft, faAngleRight, faCircle} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function Home() {
 
+  // redirect("/login");
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideNumber, setSlideNumber] = useState(0);
+  const [username, setUsername] = useState("");
 
   // next dynamic --- preventing hydration error
   const [mount, setMount] = useState(false);
 
   useEffect(() => {
     setMount(true);
-  },[mount])
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    console.log(loggedInUser)
+    if (!loggedInUser) {
+      console.log(loggedInUser);
+      router.push("/login"); // Redirect to login if no user is found
+    }
+    },[mount])
 
   const slides = [
     {
@@ -66,6 +78,13 @@ export default function Home() {
   }
 
   useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const user = JSON.parse(loggedInUser);
+      setUsername(user.username);
+    } else {
+      router.push("/login")
+    }
     const handleKeyDown = (event: { key: string; }) => {
       if (event.key === 'ArrowRight'){
         nextSlide();
@@ -86,6 +105,7 @@ export default function Home() {
   
   return (
       <div className="flex flex-col items-center justify-evenly bg-blue-200 h-[100vh] w-[100%] px-[40px] lg:px-[115px] md:px-[65px] bg-[url(/Image.png)] bg-no-repeat" >
+        <h3 className="text-[30px] font-bold tracking-wider">WELCOME {username.toUpperCase()}</h3>
         <ul className="flex justify-between w-[300px] sm:w-[370px] md:w-[400px] lg:w-[469px] items-center">
         <li className="cursor-pointer">Home</li>
         <Link href="/products">Products</Link>
@@ -125,7 +145,12 @@ export default function Home() {
             ></div>
             ))}
           </ul>
-      <button className="cursor-pointer w-[230px] h-[60px] bg-[#6497f5] text-white rounded-[100px] text-[18px] font-medium">Create an Account</button>
+      <button 
+      className="cursor-pointer w-[230px] h-[60px] bg-[#6497f5] text-white rounded-[100px] text-[18px] font-medium"
+      onClick={()=> {
+        localStorage.removeItem("loggedInUser")
+        router.push('/login')
+        }}>Logout</button>
     </div>
   );
 }
