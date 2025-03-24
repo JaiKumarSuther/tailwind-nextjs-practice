@@ -10,6 +10,13 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideNumber, setSlideNumber] = useState(0);
 
+  // next dynamic --- preventing hydration error
+  const [mount, setMount] = useState(false);
+
+  useEffect(() => {
+    setMount(true);
+  },[mount])
+
   const slides = [
     {
       title: "Startup 1",
@@ -73,6 +80,9 @@ export default function Home() {
   }, [slideNumber])
   
   
+  if(!mount) {
+    return
+  }
   
   return (
       <div className="flex flex-col items-center justify-evenly bg-blue-200 h-[100vh] w-[100%] px-[40px] lg:px-[115px] md:px-[65px] bg-[url(/Image.png)] bg-no-repeat" >
