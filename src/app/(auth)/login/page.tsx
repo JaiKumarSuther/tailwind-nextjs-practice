@@ -34,7 +34,7 @@ export default function Login() {
     Cookies.set("loggedInUser", JSON.stringify(user), {
       expires: 1, // 1 day
       path: '/' // available everywhere
-    })
+    });
 
     // Redirect to the dashboard page after successful login
     router.push("/");

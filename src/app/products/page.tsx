@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight, faCartShopping, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import {useQuery, useMutation} from '@tanstack/react-query';
-import Loading from "./loading";
+// import Loading from "./loading";
 import { useRouter } from "next/navigation";
+import Loading from "../components/Loader";
 
 export default function Products() {
   const [skip, setSkip] = useState(0);
+  
   const router = useRouter();
   const limit = 30;
 
@@ -69,7 +71,7 @@ export default function Products() {
         onClick={() => router.push(`/products/${product.id}`)}
         className=" rounded-2xl bg-white flex flex-col items-center
         shadow-[0px_10px_20px_rgba(0,0,0,0.1)] cursor-pointer">
-          <img className="w-[100%] h-[200px] rounded-t-2xl objec-ce" src={product.thumbnail}></img>
+          <img className="w-[100%] h-[200px] object-cover aspect-square rounded-t-2xl" src={product.thumbnail}></img>
           <div className="p-4">
             <div className="flex justify-between h-[60px]">
               <h1 className="font-bold text-[18px] w-[90%]">{product.title}</h1>
@@ -87,6 +89,7 @@ export default function Products() {
                   ) + "..."
                 : product.description}
             </p>
+            
 
             <div className="flex gap-2 py-2 pt-4">
               {product.tags.map((tag: any, index: number) => (

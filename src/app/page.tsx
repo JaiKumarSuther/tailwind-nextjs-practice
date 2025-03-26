@@ -94,7 +94,7 @@ export default function Home() {
 
   const handleLogout = () => {
     Cookies.remove("loggedInUser");
-    router.push("/login");
+    // router.push("/login");
   };
   
   

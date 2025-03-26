@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export function middleware(request: any) {
     // Get token or user info from cookies
     const loggedInUser = request.cookies.get("loggedInUser");
-    console.log("loggedInUser", loggedInUser)
+    console.log("loggedInUser", loggedInUser);
 
     if (!loggedInUser) {
         if (request.nextUrl.pathname !== "/login") {
@@ -14,7 +14,10 @@ export function middleware(request: any) {
     return NextResponse.next(); // Continue the request
 }
 
+const protectedRoutes = ['/products/:path*', '/cart', '/']
+
 
 export const config = {
-    matcher: ['/products/:path*', '/cart'],
+    matcher: [...protectedRoutes]
+    // matcher:  ['/products/:path*', '/cart', '/']
 }

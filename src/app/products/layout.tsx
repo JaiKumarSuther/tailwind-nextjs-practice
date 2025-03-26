@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             />
             <FontAwesomeIcon
               icon={faSearch}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-3 top-1/2 w-[15px] -translate-y-1/2 text-gray-400"
             />
           </div>
 

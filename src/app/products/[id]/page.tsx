@@ -67,7 +67,7 @@ export default function ProductDetail() {
           <img
             src={product.thumbnail}
             alt={product.title}
-            className="w-full md:h-[400px] object-cover rounded-lg flex justify-center items-center"
+            className="w-full h-[400px] object-cover rounded-lg flex justify-center items-center"
           />
         </div>
 
