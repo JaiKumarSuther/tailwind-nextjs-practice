@@ -1,4 +1,5 @@
 'use client'
+import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { faBehance, faDribbble, } from "@fortawesome/free-brands-svg-icons";
@@ -18,16 +19,6 @@ export default function Home() {
 
   // next dynamic --- preventing hydration error
   const [mount, setMount] = useState(false);
-
-  useEffect(() => {
-    setMount(true);
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    console.log(loggedInUser)
-    if (!loggedInUser) {
-      console.log(loggedInUser);
-      router.push("/login"); // Redirect to login if no user is found
-    }
-    },[mount])
 
   const slides = [
     {
@@ -78,13 +69,16 @@ export default function Home() {
   }
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    if (loggedInUser) {
-      const user = JSON.parse(loggedInUser);
-      setUsername(user.username);
+    setMount(true);
+
+    const session = Cookies.get("loggedInUser");
+    if (!session) {
+      router.push("/login");
     } else {
-      router.push("/login")
+      const user = JSON.parse(session);
+      setUsername(user.username);
     }
+
     const handleKeyDown = (event: { key: string; }) => {
       if (event.key === 'ArrowRight'){
         nextSlide();
@@ -97,6 +91,11 @@ export default function Home() {
       window.removeEventListener("keydown", handleKeyDown);
     }
   }, [slideNumber])
+
+  const handleLogout = () => {
+    Cookies.remove("loggedInUser");
+    router.push("/login");
+  };
   
   
   if(!mount) {
@@ -147,10 +146,7 @@ export default function Home() {
           </ul>
       <button 
       className="cursor-pointer w-[230px] h-[60px] bg-[#6497f5] text-white rounded-[100px] text-[18px] font-medium"
-      onClick={()=> {
-        localStorage.removeItem("loggedInUser")
-        router.push('/login')
-        }}>Logout</button>
+      onClick={handleLogout}>Logout</button>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Cookies from "js-cookie"; // Import js-cookie
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -29,19 +30,24 @@ export default function Login() {
         return;
     }
 
-    localStorage.setItem("loggedInUser", JSON.stringify(user));
+    // localStorage.setItem("loggedInUser", JSON.stringify(user));
+    Cookies.set("loggedInUser", JSON.stringify(user), {
+      expires: 1, // 1 day
+      path: '/' // available everywhere
+    })
 
     // Redirect to the dashboard page after successful login
     router.push("/");
   };
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    console.log(loggedInUser)
+    const loggedInUser = Cookies.get("loggedInUser");
+
     if (loggedInUser) {
       router.push("/"); // Redirect to login if no user is found
     }
-  })
+    console.log(loggedInUser);
+  },[])
 
   return (
     <div className="flex justify-center items-center h-screen b-gray-100">

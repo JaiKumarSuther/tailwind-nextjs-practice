@@ -49,7 +49,8 @@ export default function Products() {
     <div className="p-8 flex flex-col gap-8">
 
         <div className="flex items-center justify-between">
-            <h1 className="font-bold text-2xl">Products</h1>
+            <h1 className="font-bold text-2xl"
+            >Products</h1>
             <div className="flex font-bold text-2xl gap-3 p-1">
                 <FontAwesomeIcon icon={faAngleLeft} className={`h-[35px] w-[11px]
                 ${skip === 0 ? "opacity-30 cursor-auto" : "cursor-pointer"}  `}
