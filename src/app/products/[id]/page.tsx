@@ -11,9 +11,9 @@ import { useCart } from "react-use-cart";
 export default function ProductDetail() {
   const router = useRouter();
   const { id } = useParams(); // get id from the url
-  const { addItem } = useCart();
+  const { addItem, items } = useCart();
   const [product, setProduct] = useState<any>(null);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -25,9 +25,8 @@ export default function ProductDetail() {
         console.log("Error fetching product details", error);
       }
     };
-    console.log(product);
     fetchProduct();
-  }, [id]);
+  }, [id, quantity]);
 
   const addToCart = () => {
     if(quantity === 0) {
@@ -35,8 +34,11 @@ export default function ProductDetail() {
       return;
     }
 
-    addItem({...product, quantity});
+    setQuantity(quantity);
+
+    addItem({ ...product, quantity: Number(quantity) });
     alert('Product added successfully');
+
   };
 
   if (!product) return <Loading />;
