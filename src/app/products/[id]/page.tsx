@@ -6,10 +6,12 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../loading";
 import Cookies from "js-cookie"; // Import js-cookie
 import { useRouter } from "next/navigation";
+import { useCart } from "react-use-cart";
 
 export default function ProductDetail() {
   const router = useRouter();
   const { id } = useParams(); // get id from the url
+  const { addItem } = useCart();
   const [product, setProduct] = useState<any>(null);
   const [quantity, setQuantity] = useState(0);
 
@@ -28,24 +30,14 @@ export default function ProductDetail() {
   }, [id]);
 
   const addToCart = () => {
-    let cart = JSON.parse(Cookies.get("cart") || "[]");
-
-    const existingItem = cart.find((item: any) => item.id === product.id);
-    if (quantity !== 0) {
-      if(existingItem) {
-        existingItem.quantity += quantity;
-      } else {
-        cart.push({...product, quantity});
-      }
-    } else {
+    if(quantity === 0) {
       alert("Quantity can't be 0");
       return;
     }
 
-    Cookies.set("cart", JSON.stringify(cart), {expires: 1});
-    alert("Added to cart");
-    console.log("cart", cart);
-  }
+    addItem({...product, quantity});
+    alert('Product added successfully');
+  };
 
   if (!product) return <Loading />;
 
@@ -115,8 +107,10 @@ export default function ProductDetail() {
             </div>
           </div>
           {/* Add to Cart Button */}
-          <button className="mt-6 py-3 px-6 bg-black cursor-pointer text-white text-lg font-semibold rounded-lg shadow-md hover:bg-gray-900 transition"
-          onClick={addToCart}>
+          <button
+            className="mt-6 py-3 px-6 bg-black cursor-pointer text-white text-lg font-semibold rounded-lg shadow-md hover:bg-gray-900 transition"
+            onClick={addToCart}
+          >
             Add to cart
           </button>
         </div>

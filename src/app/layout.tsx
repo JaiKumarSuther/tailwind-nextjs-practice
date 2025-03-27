@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "./components/QueryProvider";
+import MyCartProvider from "./CartProvider"; // ✅ Corrected
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,8 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.className} ${dmSans.className} antialiased`}>
-        <QueryProvider>{children}</QueryProvider>
+      <body className={`${dmSans.className} ${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <MyCartProvider> {/* ✅ Wrap inside Client Component */}
+          <QueryProvider>{children}</QueryProvider>
+        </MyCartProvider>
       </body>
     </html>
   );
