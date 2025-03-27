@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header className="flex items-center px-6 py-4 shadow-md justify-between sticky top-0 bg-white w-full">
         {/* Left Section: Logo */}
         <h1 className="text-2xl font-semibold cursor-pointer"
-        onClick={() => router.push('/')}>My Shopping App</h1>
+        onClick={() => router.push('/products')}>My Shopping App</h1>
 
         {/* Right Section: Search, Cart, and Menu */}
         <div className="flex items-center gap-4">
